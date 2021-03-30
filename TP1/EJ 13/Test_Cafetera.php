@@ -61,6 +61,7 @@ do {
 } while ($opcion != 0);
 
 echo $Cafetera;
+<<<<<<< HEAD
 
 
 
@@ -71,3 +72,6 @@ echo $Cafetera;
 
 
 ?>
+=======
+?>
+>>>>>>> 09412b74b0b485c6fc8bbddf1228df132a7a50cb
