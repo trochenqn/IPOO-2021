@@ -30,7 +30,7 @@ function menu()
 }
 
 
-$cafe = new Cafetera(2000, 1500);
+$Cafetera = new Cafetera(2000, 1500);
 
 do {
     $opcion = menu();
@@ -40,34 +40,25 @@ do {
             echo "Apagando cafetera! \n";
             break;
         case 1:
-            echo $cafe->llenarCafetera()."\n";
+            echo $Cafetera->llenarCafetera()."\n";
             break;
         case 2:
-            echo $cafe->servirTaza(480). "\n";
+            echo $Cafetera->servirTaza(480). "\n";
             break;
         case 3:
-            echo $cafe->vaciarcafetera(). "\n";
+            echo $Cafetera->vaciarcafetera(). "\n";
             break;
         case 4:
-            $faltaCafe= $cafe->getCantidadActual();
+            $faltaCafe= $Cafetera->getCantidadActual();
 
            echo "La cafetera posee  la cantida de Cafe: ".$faltaCafe." ml \n";
-           if ($faltaCafe <$cafe->getCapacidadMaxima()){
-             $faltaCafe= $cafe->getCapacidadMaxima() - $cafe->getCantidadActual();
-            echo $cafe->agregarCafe($faltaCafe);
+           if ($faltaCafe <$Cafetera->getCapacidadMaxima()){
+             $faltaCafe= $Cafetera->getCapacidadMaxima() - $Cafetera->getCantidadActual();
+            echo $Cafetera->agregarCafe($faltaCafe);
             }
             break;
     }
 } while ($opcion != 0);
 
-echo $cafe;
-
-
-
-
-
-
-
-
-
+echo $Cafetera;
 ?>
