@@ -7,6 +7,7 @@ private $direccionTeatro;
 private $nombreFuncion;
 private $precioFuncion=0; 
 private $FuncionDia=array();
+private $funcion;
 
 // constructor
 public function __construct($n, $d, $nf, $pf, $array=null)
@@ -16,6 +17,7 @@ public function __construct($n, $d, $nf, $pf, $array=null)
     $this->nombreFuncion=$nf;
     $this->precioFuncion=$pf;
     $this->FuncionDia= $array;
+    $this->funcion=0;
 }
 
 // Get y Set
@@ -57,6 +59,15 @@ public function getFuncionPrecio()
 {
     return $this->precioFuncion;
 }
+public function getFuncion()
+{
+    return $this->funcion;
+}
+
+public function setFuncion($numeroFuncion=0)
+{
+    $this->funcion= $numeroFuncion;
+}
 //Metodos
 public function cambiarNombreTeatro_direccion($nombreNuevo,$direccion)
 {
@@ -65,17 +76,21 @@ public function cambiarNombreTeatro_direccion($nombreNuevo,$direccion)
     return "El cambio se realizo con exito";
 }
 
-public function cargarFuncion($nombreFuncionNueva, $precioFuncionNuevo, $i)
+public function cargarFuncion($nombreFuncionNueva, $precioFuncionNuevo)
 {
     $arrayFuncion= $this->getFuncionDia();    
     
-      $arrayFuncion[$i]["nombre"]= $nombreFuncionNueva;
+    if ($this->getFuncion()<=3){
+      $arrayFuncion[$this->getFuncion()]["nombre"]= $nombreFuncionNueva;
       $this->setFuncionDia($arrayFuncion);
-      $arrayFuncion[$i]["precio"]= $precioFuncionNuevo;
+      $arrayFuncion[$this->getFuncion()]["precio"]= $precioFuncionNuevo;
       $this->setFuncionDia($arrayFuncion);   
-      if ($i==4){
-             return "Se cargaron las cuatros funciones del dia";
+      if ($this->getFuncion()==3){
+        $this->setFuncion(0);
+          return "Se cargaron las cuatros funciones del dia";
          }
+         $this->setFuncion($this->getFuncion()+1);
+    }
      
 }
 
@@ -89,13 +104,17 @@ public function modificarFuncion_precio($modificacion, $turno=null, $nombreFunci
         $arrayFuncion[$turno]["precio"]= $precioFuncionModificar;
         $this->setFuncionDia($arrayFuncion);
     }else{
+    if ($this->getFuncion()<=3){
         $arrayFuncion[$turno]["nombre"]= $nombreFuncionMofificar;
         $this->setFuncionDia($arrayFuncion);
         $arrayFuncion[$turno]["precio"]= $precioFuncionModificar;
         $this->setFuncionDia($arrayFuncion);
-        if ($turno==4){
+        if ($this->getFuncion()==3){
             return "Se modificaron con exito las funciones";
+            $this->setFuncion(0);
         }
+     }
+     $this->setFuncion($turno);
     }
 
   
@@ -118,6 +137,19 @@ public function mostrarFunciones()
     }
      
 }
+
+public function borrarFunciones()
+{
+    if($this->FuncionDia==NULL){
+        return 'No hay datos que borrar';
+    }else{
+        foreach ($this->FuncionDia as $key => $funciones) {
+            unset($this->FuncionDia[$key]);
+           }
+      return 'Se han borrado todas las funciones del dia';
+    }
+}
+
 
 public function __toString()
 {

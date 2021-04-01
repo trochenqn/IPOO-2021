@@ -12,6 +12,7 @@ function menu()
     echo "2) Cargar Funcion del dia. \n";
     echo "3) Modificar Funcion del dia. \n";
     echo "4) visualizar funciones. \n";
+    echo "5) Borrar Funciones. \n";
     echo "0) Salir. \n";
     echo "***********************************\n";
 
@@ -36,13 +37,13 @@ do{
            echo $nuevoTeatro->cambiarNombreTeatro_direccion("Gran Rex", " Avenida Corrientes (nº 857) - BS.AS"). "\n";
             break;
         case 2:
-            $i=1;
-            while ($i <=4){
+            $i=0;
+            while ($i <=3){
                 echo " (*) Ingrese el nombre de la Funcion----\n";
                 $nombreFuncion = trim(fgets(STDIN));
                 echo " (*) Ingrese el precio de la Funcion----\n";
                 $precioFuncion = (int)trim(fgets(STDIN));
-                echo $nuevoTeatro->cargarFuncion($nombreFuncion,$precioFuncion, $i)."\n";
+                echo $nuevoTeatro->cargarFuncion($nombreFuncion,$precioFuncion)."\n";
                 $i++;
             }
             break;
@@ -51,13 +52,13 @@ do{
             $modificacion = strtoupper(trim(fgets(STDIN)));
             echo $modificacion;
             if ($modificacion==="A"){
-                echo " (*) Ingrese el turno a modificar -1, 2, 3 o 4- \n"; 
+                echo " (*) Ingrese el turno a modificar -0, 1, 2 o 3- \n"; 
                 $turno = (int) trim(fgets(STDIN));
                 $nuevoTeatro->modificarFuncion_precio($modificacion, $turno,"Theodora 2", 2500)."\n";
                 
             }else{
-                $i=1;
-                while($i<=4){
+                $i=0;
+                while($i<=3){
                 echo " (*) Ingrese el nombre de la funcion a modificar->". $i ." \n";
                 $nombreFuncion = trim(fgets(STDIN));
                 echo " (*) Ingrese el precio de la Funcion a modificar->". $i ." \n";
@@ -69,6 +70,9 @@ do{
             break;
         case 4:
             echo $nuevoTeatro; 
+            break;
+        case 5:
+            echo $nuevoTeatro->borrarFunciones()."\n"; 
             break;
     }
 } while ($opcion != 0);
